@@ -8,17 +8,6 @@
 7. Higher order function and arrow function 
 
 
-Code block (fenced):
-
-```
-```
-
-Code block with syntax highlighting:
-
-```javascript
-const code = 'example';
-```
-
 # Node.js Architecture
 - Single-Threaded and Non-blocking I/O
 - Event loop
@@ -33,3 +22,56 @@ const code = 'example';
 ![pic1](./images/p1.png)
 
 ![pic2](./images/p2.png)
+
+ ## CallBack
+ > This is a function which will be passed as argument to another function and intended to be executed after the completion of that function (the function which receive the callback)
+```javascript
+function prepareBread(callback) {
+  setTimeout(function () {
+    console.log("Bread is ready!");
+    callback();
+  }, 1000);
+}
+
+function addCheese() {
+  console.log("Cheese added!");
+}
+
+prepareBread(addCheese);
+
+```
+ ## CallBack Hell
+```javascript
+prepareBread(function () {
+  addCheese(function () {
+    addTomato(function () {
+      addLettuce(function () {
+        // And it goes on...
+      });
+    });
+  });
+});
+
+```
+ ## Promise
+```javascript
+function prepareBread() {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      console.log("Bread is ready!");
+      resolve();
+    }, 1000);
+  });
+}
+
+function addCheese() {
+  console.log("Cheese added!");
+}
+
+prepareBread()
+  .then(addCheese)
+  .then(function () {
+    console.log("Sandwich is ready!");
+  });
+
+```

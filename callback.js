@@ -9,5 +9,6 @@ function loadData(callback) {
     callback(data); // Call the provided callback function
   }, 1000);
 }
-
+console.log("Before");
 loadData(displayData);
+console.log("After");
